@@ -1,17 +1,17 @@
 /* Merchant Preview Template — zero paid CDN; system fonts + CSS/SVG only */
 
 :root {
-  --bg: #fff8fb;
-  --bg-tint: #f5e8ef;
-  --ink: #1f1520;
-  --muted: #6a5460;
-  --line: #ead7e0;
-  --brand: #9b4d6c;
-  --brand-dark: #7a3a54;
-  --accent: #d4789c;
+  --bg: #fffaf4;
+  --bg-tint: #f3ebe1;
+  --ink: #1f1a14;
+  --muted: #5c5348;
+  --line: #e4d7c7;
+  --brand: #8b5a2b;
+  --brand-dark: #6b4423;
+  --accent: #c47a3a;
   --card: #ffffff;
   --ok: #4a7c59;
-  --banner: #1f1520;
+  --banner: #1f1a14;
   --radius: 16px;
   --shadow: 0 10px 30px rgba(31, 26, 20, 0.08);
   --wrap: min(1080px, calc(100% - 2rem));
