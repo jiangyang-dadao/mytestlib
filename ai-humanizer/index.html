@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Humanizer — Free Demo | Soften AI Drafts</title>
+  <meta name="description" content="Free AI Humanizer demo. Soften stiff AI drafts into clearer, more natural professional writing. Not for academic misconduct." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand">AI Humanizer</div>
+    <div class="badge" id="counterBadge">12,847 texts softened today</div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>AI Humanizer</h1>
+      <p class="sub">Turn stiff AI drafts into clearer, more natural professional writing — free demo, no signup.</p>
+    </section>
+
+    <section class="panel">
+      <div class="toolbar">
+        <button type="button" class="ghost" id="pasteExample">Paste example</button>
+        <button type="button" class="ghost" id="clearBtn">Clear</button>
+      </div>
+      <label class="sr-only" for="input">Input text</label>
+      <textarea id="input" rows="8" placeholder="Paste your AI draft here…"></textarea>
+      <div class="actions">
+        <button type="button" class="primary" id="humanizeBtn">
+          <span class="btn-label">Humanize</span>
+          <span class="spinner" hidden></span>
+        </button>
+        <span class="hint" id="statusHint"></span>
+      </div>
+      <label class="out-label" for="output">Result</label>
+      <textarea id="output" rows="8" readonly placeholder="Humanized text appears here…"></textarea>
+      <button type="button" class="ghost copy" id="copyBtn" hidden>Copy result</button>
+    </section>
+
+    <section class="grid">
+      <article>
+        <h2>How it works</h2>
+        <ol>
+          <li>Paste a stiff AI draft (email, memo, product copy).</li>
+          <li>Hit <strong>Humanize</strong> — we reshape phrasing and rhythm.</li>
+          <li>Review, edit, and publish as your own voice.</li>
+        </ol>
+      </article>
+      <article>
+        <h2>Who it’s for</h2>
+        <ul>
+          <li>Founders polishing outreach and landing copy</li>
+          <li>Operators turning notes into clear memos</li>
+          <li>Creators softening robotic blog drafts</li>
+        </ul>
+        <p class="note">Built for <em>professional drafts</em> — not academic cheating.</p>
+      </article>
+    </section>
+
+    <aside class="disclaimer">
+      <strong>Disclaimer.</strong> This free demo is for rewriting professional drafts to sound clearer and more natural.
+      It is <strong>not</strong> for academic misconduct, exam cheating, or detector bypass.
+      Transparency is encouraged: disclose AI assistance when appropriate. You are responsible for how you use the output.
+    </aside>
+  </main>
+
+  <footer class="foot">
+    <span>AI Humanizer · D0 demo · No login · No payment</span>
+  </footer>
+
+  <script>
+    (function () {
+      const EXAMPLES = [
+        "In today's rapidly evolving digital landscape, it is imperative that organizations leverage cutting-edge artificial intelligence solutions in order to optimize operational efficiency and drive meaningful stakeholder value across all verticals.",
+        "Furthermore, it should be noted that the aforementioned methodology facilitates a comprehensive understanding of key performance indicators, thereby enabling data-driven decision-making processes that are aligned with strategic objectives.",
+        "Our innovative platform seamlessly integrates state-of-the-art natural language processing capabilities to empower users to generate high-quality content at scale while maintaining consistency and brand voice integrity."
+      ];
+
+      const SYNONYMS = {
+        "leverage": ["use", "apply", "tap into"],
+        "utilize": ["use", "apply"],
+        "facilitate": ["help", "make easier", "support"],
+        "optimize": ["improve", "tune", "sharpen"],
+        "comprehensive": ["full", "thorough", "broad"],
+        "innovative": ["new", "fresh", "clever"],
+        "cutting-edge": ["modern", "advanced", "up-to-date"],
+        "state-of-the-art": ["modern", "advanced"],
+        "aforementioned": ["above", "that"],
+        "imperative": ["important", "essential", "critical"],
+        "furthermore": ["also", "plus", "and"],
+        "thereby": ["and so", "which"],
+        "seamless": ["smooth", "simple"],
+        "seamlessly": ["smoothly", "easily"],
+        "empower": ["help", "enable", "let"],
+        "stakeholders": ["people involved", "teams", "partners"],
+        "verticals": ["areas", "markets", "lines of work"],
+        "methodology": ["approach", "method", "process"],
+        "utilize": ["use"],
+        "in order to": ["to"],
+        "it should be noted that": [""],
+        "it is important to note that": [""],
+        "in today's rapidly evolving digital landscape": ["right now"],
+        "at scale": ["widely", "for many users"],
+        "key performance indicators": ["key metrics", "main numbers"],
+        "data-driven": ["based on data", "guided by numbers"],
+        "artificial intelligence": ["AI", "smart tools"],
+        "natural language processing": ["language tools", "NLP"],
+        "high-quality": ["solid", "clear", "strong"],
+        "brand voice integrity": ["your usual tone", "your brand voice"]
+      };
+
+      const openers = [
+        "",
+        "Here's a clearer take: ",
+        "Try this version: ",
+        ""
+      ];
+
+      const input = document.getElementById("input");
+      const output = document.getElementById("output");
+      const humanizeBtn = document.getElementById("humanizeBtn");
+      const pasteExample = document.getElementById("pasteExample");
+      const clearBtn = document.getElementById("clearBtn");
+      const copyBtn = document.getElementById("copyBtn");
+      const statusHint = document.getElementById("statusHint");
+      const counterBadge = document.getElementById("counterBadge");
+      const spinner = humanizeBtn.querySelector(".spinner");
+      const btnLabel = humanizeBtn.querySelector(".btn-label");
+
+      let fakeCount = 12847 + Math.floor(Math.random() * 40);
+      function tickCounter() {
+        fakeCount += Math.floor(Math.random() * 3) + 1;
+        counterBadge.textContent = fakeCount.toLocaleString() + " texts softened today";
+      }
+      setInterval(tickCounter, 8000);
+
+      pasteExample.addEventListener("click", () => {
+        input.value = EXAMPLES[Math.floor(Math.random() * EXAMPLES.length)];
+        statusHint.textContent = "Example loaded";
+      });
+
+      clearBtn.addEventListener("click", () => {
+        input.value = "";
+        output.value = "";
+        copyBtn.hidden = true;
+        statusHint.textContent = "";
+      });
+
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(output.value);
+          statusHint.textContent = "Copied";
+        } catch {
+          statusHint.textContent = "Select and copy manually";
+        }
+      });
+
+      function pick(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      function softReplace(text) {
+        let out = text;
+        const keys = Object.keys(SYNONYMS).sort((a, b) => b.length - a.length);
+        for (const key of keys) {
+          const re = new RegExp(key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
+          out = out.replace(re, () => {
+            const opts = SYNONYMS[key];
+            return pick(opts);
+          });
+        }
+        return out;
+      }
+
+      function splitSentences(text) {
+        return text
+          .replace(/\s+/g, " ")
+          .trim()
+          .split(/(?<=[.!?])\s+/)
+          .filter(Boolean);
+      }
+
+      function varySentence(s) {
+        let t = softReplace(s).trim();
+        if (!t) return t;
+        // Light rhythm tweak: shorten very long openers
+        t = t.replace(/^Additionally,\s*/i, "Also, ");
+        t = t.replace(/^Moreover,\s*/i, "Plus, ");
+        t = t.replace(/^In conclusion,\s*/i, "So, ");
+        t = t.replace(/\butilize\b/gi, "use");
+        // Occasional contraction feel
+        t = t.replace(/\bit is\b/gi, () => (Math.random() > 0.5 ? "it's" : "it is"));
+        t = t.replace(/\bdo not\b/gi, () => (Math.random() > 0.5 ? "don't" : "do not"));
+        t = t.replace(/\bwe are\b/gi, () => (Math.random() > 0.5 ? "we're" : "we are"));
+        // Drop leftover double spaces
+        t = t.replace(/\s{2,}/g, " ").replace(/\s+([,.!?])/g, "$1");
+        return t;
+      }
+
+      function humanize(text) {
+        const sentences = splitSentences(text);
+        if (!sentences.length) return "";
+        const rewritten = sentences.map(varySentence).filter(Boolean);
+        // Mild reorder for 3+ sentences (swap middle pair sometimes)
+        if (rewritten.length >= 3 && Math.random() > 0.55) {
+          const i = 1;
+          const tmp = rewritten[i];
+          rewritten[i] = rewritten[i + 1] || rewritten[i];
+          if (rewritten[i + 1]) rewritten[i + 1] = tmp;
+        }
+        let body = rewritten.join(" ");
+        // Ensure terminal punctuation
+        if (body && !/[.!?]$/.test(body)) body += ".";
+        const prefix = pick(openers);
+        // Don't prefix when empty opener or when user text is short
+        if (!prefix || text.length < 80) return body;
+        return prefix + body.charAt(0).toLowerCase() + body.slice(1);
+      }
+
+      humanizeBtn.addEventListener("click", () => {
+        const raw = input.value.trim();
+        if (!raw) {
+          statusHint.textContent = "Paste some text first";
+          input.focus();
+          return;
+        }
+        humanizeBtn.disabled = true;
+        spinner.hidden = false;
+        btnLabel.textContent = "Processing…";
+        statusHint.textContent = "Softening phrasing…";
+        output.value = "";
+        copyBtn.hidden = true;
+
+        const delay = 700 + Math.floor(Math.random() * 900);
+        setTimeout(() => {
+          output.value = humanize(raw);
+          spinner.hidden = true;
+          btnLabel.textContent = "Humanize";
+          humanizeBtn.disabled = false;
+          copyBtn.hidden = false;
+          statusHint.textContent = "Done — review before you send";
+          fakeCount += 1;
+          counterBadge.textContent = fakeCount.toLocaleString() + " texts softened today";
+        }, delay);
+      });
+    })();
+  </script>
+</body>
+</html>
