@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tough Like a Gorilla AI — Make the Viral Quesadilla Meme Video</title>
+  <meta name="description" content="Turn your selfie into the Tough Like a Gorilla AI video (more like a quesadilla). Upload a photo, get a free preview, download a vertical MP4 ready for TikTok." />
+  <meta name="keywords" content="tough like a gorilla ai, quesadilla ai video, tough like a gorilla generator, more like a quesadilla ai" />
+  <meta property="og:title" content="Tough Like a Gorilla AI Video Generator" />
+  <meta property="og:description" content="Put your face in the viral Tough Like a Gorilla / More Like a Quesadilla meme. Free preview. No app install." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="/" />
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --card: #14161c;
+      --line: #2a2e3a;
+      --text: #f4f5f7;
+      --muted: #9aa3b2;
+      --accent: #ff5a36;
+      --accent2: #ffd166;
+      --ok: #3ddc97;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 80% -10%, #2a120c 0%, transparent 55%),
+                  radial-gradient(900px 500px at 0% 20%, #1a2030 0%, transparent 50%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    a { color: var(--accent2); }
+    .wrap { width: min(980px, 92vw); margin: 0 auto; }
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 0; border-bottom: 1px solid transparent;
+    }
+    .logo { font-weight: 800; letter-spacing: -0.02em; }
+    .logo span { color: var(--accent); }
+    .badge {
+      font-size: 12px; color: var(--ok); border: 1px solid #24553f;
+      background: #10261c; padding: 4px 10px; border-radius: 999px;
+    }
+    .hero { padding: 48px 0 28px; display: grid; gap: 28px; }
+    @media (min-width: 860px) {
+      .hero { grid-template-columns: 1.15fr 0.85fr; align-items: center; }
+    }
+    h1 {
+      font-size: clamp(2rem, 4.6vw, 3.3rem);
+      line-height: 1.08; letter-spacing: -0.03em; margin: 0 0 14px;
+    }
+    .lead { color: var(--muted); font-size: 1.05rem; margin: 0 0 22px; max-width: 36ch; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+    .btn {
+      appearance: none; border: 0; cursor: pointer; border-radius: 12px;
+      padding: 13px 18px; font-weight: 700; font-size: 15px;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), #ff8a4c); color: #140700; }
+    .btn-primary:hover { filter: brightness(1.05); }
+    .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+    .points { display: flex; flex-wrap: wrap; gap: 10px 16px; color: var(--muted); font-size: 14px; padding: 0; margin: 0; list-style: none; }
+    .points li::before { content: "✓ "; color: var(--ok); font-weight: 700; }
+    .panel {
+      background: linear-gradient(180deg, #1a1d26, var(--card));
+      border: 1px solid var(--line); border-radius: 18px; padding: 18px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    }
+    .panel h2 { margin: 0 0 12px; font-size: 1.05rem; }
+    .uploader {
+      border: 1.5px dashed #3a4152; border-radius: 14px; padding: 22px 16px;
+      text-align: center; background: #0f1218; margin-bottom: 12px;
+    }
+    .uploader.drag { border-color: var(--accent); background: #1a1210; }
+    .uploader strong { display: block; margin-bottom: 4px; }
+    .uploader p { margin: 0; color: var(--muted); font-size: 13px; }
+    .preview-box {
+      min-height: 180px; border-radius: 12px; background: #0a0b0f;
+      border: 1px solid var(--line); display: grid; place-items: center;
+      color: var(--muted); font-size: 14px; overflow: hidden; margin-bottom: 12px;
+      position: relative;
+    }
+    .preview-box img { width: 100%; height: 100%; object-fit: cover; max-height: 280px; }
+    .role-pick { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .role {
+      border: 1px solid var(--line); background: #10131a; border-radius: 10px;
+      padding: 10px; cursor: pointer; font-size: 13px; text-align: left; color: var(--text);
+    }
+    .role.active { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+    .role small { display: block; color: var(--muted); margin-top: 2px; }
+    .gen-status { min-height: 20px; font-size: 13px; color: var(--muted); margin-top: 8px; }
+    .section { padding: 36px 0; }
+    .section h2 { font-size: 1.55rem; margin: 0 0 8px; letter-spacing: -0.02em; }
+    .section .sub { color: var(--muted); margin: 0 0 20px; }
+    .steps { display: grid; gap: 12px; }
+    @media (min-width: 760px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+    .step {
+      background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px;
+    }
+    .step .n {
+      width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center;
+      background: #2a140f; color: var(--accent2); font-weight: 800; margin-bottom: 10px; font-size: 13px;
+    }
+    .faq details {
+      background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+      padding: 14px 16px; margin-bottom: 10px;
+    }
+    .faq summary { cursor: pointer; font-weight: 650; }
+    .faq p { color: var(--muted); margin: 10px 0 0; }
+    footer {
+      border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--muted); font-size: 13px;
+    }
+    .note {
+      margin-top: 18px; padding: 12px 14px; border-radius: 10px;
+      background: #17120e; border: 1px solid #3a2a1c; color: #d7c4a8; font-size: 13px;
+    }
+    .modal-back {
+      position: fixed; inset: 0; background: rgba(0,0,0,.6); display: none;
+      align-items: center; justify-content: center; padding: 20px; z-index: 40;
+    }
+    .modal-back.show { display: flex; }
+    .modal {
+      width: min(420px, 100%); background: #171a22; border: 1px solid var(--line);
+      border-radius: 16px; padding: 20px;
+    }
+    .modal h3 { margin: 0 0 8px; }
+    .modal p { color: var(--muted); margin: 0 0 14px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">ToughLikeA<span>Gorilla</span>.AI</div>
+      <div class="badge">Viral meme · Nov 2026</div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1>Make the Tough Like a Gorilla AI video from your photo</h1>
+        <p class="lead">
+          Drop yourself into the “more like a quesadilla” meme. Upload one clear selfie,
+          pick singer or shocked face, get a free preview, then unlock a vertical clip for TikTok / Reels / Shorts.
+        </p>
+        <div class="cta-row">
+          <button class="btn btn-primary" id="scrollToMake">Make my video</button>
+          <a class="btn btn-ghost" href="#faq">How it works</a>
+        </div>
+        <ul class="points">
+          <li>1–2 photos</li>
+          <li>~6 second vertical MP4</li>
+          <li>Free preview first</li>
+          <li>No app install</li>
+        </ul>
+      </div>
+
+      <div class="panel" id="make">
+        <h2>Generate Tough Like a Gorilla AI</h2>
+        <div class="role-pick" role="group" aria-label="Choose role">
+          <button class="role active" data-role="singer" type="button">
+            Singer
+            <small>“Tough like a gorilla…”</small>
+          </button>
+          <button class="role" data-role="shocked" type="button">
+            Shocked face
+            <small>Background reaction</small>
+          </button>
+        </div>
+        <div class="uploader" id="dropzone">
+          <strong>Upload a selfie</strong>
+          <p>Clear face, good light. JPG/PNG. Adults only.</p>
+          <input id="file" type="file" accept="image/*" hidden />
+          <div style="margin-top:12px">
+            <button class="btn btn-ghost" type="button" id="pickBtn">Choose photo</button>
+          </div>
+        </div>
+        <div class="preview-box" id="preview">Your photo preview appears here</div>
+        <button class="btn btn-primary" style="width:100%" type="button" id="generateBtn">Generate free preview</button>
+        <div class="gen-status" id="status"></div>
+        <div class="note">Draft UI only — generation pipeline not wired. No payment / Stripe on this page.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>What is the Tough Like a Gorilla AI trend?</h2>
+      <p class="sub">
+        Creators put their own face into the Spy Ninjas “Come Back Daniel” moment —
+        the line “Think you’re tough like a gorilla? … more like a quesadilla.”
+        In November 2026 the remake wave went hot on TikTok and Reels. People search
+        <strong>tough like a gorilla ai</strong> when they want a one-tap tool instead of writing prompts.
+      </p>
+      <div class="steps">
+        <div class="step">
+          <div class="n">1</div>
+          <strong>Upload</strong>
+          <p style="color:var(--muted);margin:6px 0 0">One selfie for the singer, optional second photo for the shocked face.</p>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <strong>Preview</strong>
+          <p style="color:var(--muted);margin:6px 0 0">See a free still or short preview before you unlock the clip.</p>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <strong>Download</strong>
+          <p style="color:var(--muted);margin:6px 0 0">Get a ~6s 9:16 MP4 ready to post with the meme sound.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <h2>Tough Like a Gorilla AI — FAQ</h2>
+      <p class="sub">Questions people actually type after seeing the meme.</p>
+      <div class="faq">
+        <details open>
+          <summary>What is Tough Like a Gorilla AI?</summary>
+          <p>It is an AI face-swap / remake tool for the viral “tough like a gorilla / more like a quesadilla” clip. You upload a photo and get a short vertical video with your face in the scene.</p>
+        </details>
+        <details>
+          <summary>How do I make the Tough Like a Gorilla AI video?</summary>
+          <p>Upload a clear selfie, choose the singer or shocked-face role, tap Generate free preview, then unlock the full MP4 when the pipeline is live. No CapCut timeline and no prompt engineering required on this page.</p>
+        </details>
+        <details>
+          <summary>Do I need two people?</summary>
+          <p>No. One photo is enough for the singer. Add a second photo only if you want a friend (or pet) as the shocked face in the background.</p>
+        </details>
+        <details>
+          <summary>Is this free?</summary>
+          <p>The preview is free. Full watermark-free download will be a one-time unlock (pricing TBD — Stripe not connected on this draft).</p>
+        </details>
+        <details>
+          <summary>Is this an official Spy Ninjas tool?</summary>
+          <p>No. This is an independent fan remake utility. It is not affiliated with Spy Ninjas, YouTube, or TikTok.</p>
+        </details>
+        <details>
+          <summary>Can I use a pet photo?</summary>
+          <p>Yes for the reaction / shocked role. Use a sharp full-face or full-body pet photo. Results vary by model quality.</p>
+        </details>
+        <details>
+          <summary>What size is the video?</summary>
+          <p>About 6 seconds, vertical 9:16, aimed at TikTok, Instagram Reels and YouTube Shorts.</p>
+        </details>
+        <details>
+          <summary>Why does Google show meme pages instead of generators?</summary>
+          <p>The search term is still early. Dedicated generator sites usually appear after the first social wave — this landing page is built for that gap.</p>
+        </details>
+        <details>
+          <summary>Are my photos stored forever?</summary>
+          <p>Draft policy: photos and outputs are private, used only to render your clip, and deleted on a short retention window once the backend is connected. Do not upload celebrities or anyone who did not agree.</p>
+        </details>
+      </div>
+    </section>
+
+    <footer>
+      <div>© 2026 Tough Like a Gorilla AI · Independent meme remake tool · Not affiliated with Spy Ninjas</div>
+      <div style="margin-top:6px">Static draft for keyword landing. Deploy pending · no domain purchase · no Stripe.</div>
+    </footer>
+  </div>
+
+  <div class="modal-back" id="modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-labelledby="mTitle">
+      <h3 id="mTitle">Preview queued (demo)</h3>
+      <p>This static draft only simulates the button. Wire Seedance / similar later. No charge was made.</p>
+      <button class="btn btn-primary" type="button" id="closeModal">Got it</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const file = document.getElementById('file');
+      const pickBtn = document.getElementById('pickBtn');
+      const dropzone = document.getElementById('dropzone');
+      const preview = document.getElementById('preview');
+      const generateBtn = document.getElementById('generateBtn');
+      const status = document.getElementById('status');
+      const modal = document.getElementById('modal');
+      const roles = document.querySelectorAll('.role');
+      let selectedRole = 'singer';
+      let hasPhoto = false;
+
+      document.getElementById('scrollToMake').addEventListener('click', function () {
+        document.getElementById('make').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      roles.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          roles.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          selectedRole = btn.getAttribute('data-role');
+        });
+      });
+
+      pickBtn.addEventListener('click', function () { file.click(); });
+      dropzone.addEventListener('click', function (e) {
+        if (e.target === pickBtn) return;
+        file.click();
+      });
+
+      ;['dragenter', 'dragover'].forEach(function (ev) {
+        dropzone.addEventListener(ev, function (e) {
+          e.preventDefault(); dropzone.classList.add('drag');
+        });
+      });
+      ;['dragleave', 'drop'].forEach(function (ev) {
+        dropzone.addEventListener(ev, function (e) {
+          e.preventDefault(); dropzone.classList.remove('drag');
+        });
+      });
+      dropzone.addEventListener('drop', function (e) {
+        const f = e.dataTransfer.files && e.dataTransfer.files[0];
+        if (f) showFile(f);
+      });
+      file.addEventListener('change', function () {
+        if (file.files && file.files[0]) showFile(file.files[0]);
+      });
+
+      function showFile(f) {
+        if (!f.type || f.type.indexOf('image/') !== 0) {
+          status.textContent = 'Please choose an image file.';
+          return;
+        }
+        const url = URL.createObjectURL(f);
+        preview.innerHTML = '';
+        const img = document.createElement('img');
+        img.alt = 'Uploaded selfie preview';
+        img.src = url;
+        preview.appendChild(img);
+        hasPhoto = true;
+        status.textContent = 'Photo ready · role: ' + selectedRole;
+      }
+
+      generateBtn.addEventListener('click', function () {
+        if (!hasPhoto) {
+          status.textContent = 'Upload a selfie first.';
+          return;
+        }
+        status.textContent = 'Simulating queue for role “' + selectedRole + '”…';
+        generateBtn.disabled = true;
+        setTimeout(function () {
+          generateBtn.disabled = false;
+          status.textContent = 'Demo complete — backend not connected.';
+          modal.classList.add('show');
+          modal.setAttribute('aria-hidden', 'false');
+        }, 900);
+      });
+
+      document.getElementById('closeModal').addEventListener('click', function () {
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden', 'true');
+      });
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) {
+          modal.classList.remove('show');
+          modal.setAttribute('aria-hidden', 'true');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
