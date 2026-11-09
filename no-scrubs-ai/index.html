@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>No Scrubs AI Video — Make a No Scrubs AI Video from One Photo</title>
+<meta name="description" content="No Scrubs AI / No Scrubs AI Video generator demo. Turn one photo into a late-90s silver aesthetic AI music video. Inspired template — not affiliated with the original song."/>
+<style>
+:root{--bg:#07070c;--card:#12121a;--ink:#f4f1ea;--muted:#a7a0b5;--accent:#c0c7d1;--pink:#ff4d8d;--line:#2a2a38}
+*{box-sizing:border-box}body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:radial-gradient(900px 500px at 80% -10%,#2a1030,transparent),var(--bg);color:var(--ink);line-height:1.55}
+.wrap{max-width:900px;margin:0 auto;padding:28px 16px 72px}
+.badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:linear-gradient(90deg,var(--accent),#fff);color:#111;padding:5px 10px;border-radius:999px;font-weight:800}
+h1{font-size:clamp(1.9rem,5vw,2.8rem);margin:14px 0 10px;letter-spacing:-.02em}
+.sub{color:var(--muted);max-width:62ch;margin:0 0 22px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.drop{border:1.5px dashed #4a4458;border-radius:14px;padding:28px;text-align:center;background:#0c0c14;cursor:pointer}
+.drop strong{display:block;margin-bottom:6px}
+.drop span{color:var(--muted);font-size:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+button{appearance:none;border:0;border-radius:12px;padding:12px 16px;font-weight:800;cursor:pointer}
+.primary{background:var(--pink);color:#fff}.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.preview{margin-top:14px;min-height:180px;border-radius:14px;background:linear-gradient(160deg,#1b1b28,#0d0d14 55%,#2a2030);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--muted);overflow:hidden;position:relative}
+.preview img{max-width:100%;max-height:320px;object-fit:contain;filter:grayscale(.15) contrast(1.15) saturate(.7) brightness(1.05)}
+.chrome{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 30% 20%,rgba(192,199,209,.18),transparent 45%),linear-gradient(180deg,rgba(255,255,255,.05),transparent 30%)}
+.meta{font-size:12px;color:var(--muted)}
+.faq{margin-top:34px}.faq h2{font-size:1.25rem;margin:0 0 12px}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 8px}
+summary{cursor:pointer;font-weight:700}details p{margin:8px 0 0;color:var(--muted);font-size:14px}
+.warn{margin-top:18px;padding:12px 14px;border-radius:12px;border:1px solid #5a3d12;background:#23180a;color:#f0d2a0;font-size:13px}
+footer{margin-top:28px;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="badge">No Scrubs AI · D0 demo</span>
+  <h1>No Scrubs AI Video</h1>
+  <p class="sub">Make a <strong>No Scrubs AI video</strong> from one photo — late-90s silver aesthetic, vertical-ready demo. Inspired template for creators. Not affiliated with the original recording or rights holders.</p>
+  <div class="panel">
+    <div class="drop" id="drop" role="button" tabindex="0">
+      <strong>Drop one photo</strong>
+      <span>JPG/PNG · client-side preview only tonight</span>
+      <input id="file" type="file" accept="image/*" hidden/>
+    </div>
+    <div class="row">
+      <button class="primary" id="go" type="button">Make No Scrubs AI Video</button>
+      <button class="ghost" id="clear" type="button">Clear</button>
+      <span class="meta" id="status">Ready · fake generate (no API yet)</span>
+    </div>
+    <div class="preview" id="stage"><span id="placeholder">Your stylized frame will appear here</span><div class="chrome"></div><img id="img" alt="" hidden/></div>
+  </div>
+  <section class="faq" id="faq">
+    <h2>FAQ — How to make a No Scrubs AI video</h2>
+    <details open>
+      <summary>How to make a No Scrubs AI video from one photo?</summary>
+      <p>Upload a clear solo portrait, tap <em>Make No Scrubs AI Video</em>, and preview the silver late-90s look. Tonight this page runs a free client-side style demo; motion export / cloud comes next.</p>
+    </details>
+    <details>
+      <summary>What is No Scrubs AI / No Scrubs AI video?</summary>
+      <p>A trending one-photo → stylized AI music-video template inspired by late-90s chrome/silver visuals. Creators search “no scrubs ai video” for a quick vertical clip look.</p>
+    </details>
+    <details>
+      <summary>Do I need an account or payment?</summary>
+      <p>No. This D0 homepage has no login and no payment. Waitlist / paid render packs may arrive later.</p>
+    </details>
+    <details>
+      <summary>Is this official?</summary>
+      <p>No. Fan-made inspired tooling only — not affiliated with TLC, the song “No Scrubs,” or any label. Don’t upload images you don’t have rights to use.</p>
+    </details>
+  </section>
+  <div class="warn"><strong>Rights note:</strong> Use your own photos. We don’t claim affiliation with the original song. Avoid uploading others’ faces without permission.</div>
+  <footer>no scrubs ai · no scrubs ai video · zero-prepaid D0</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const file=$("file"), drop=$("drop"), img=$("img"), ph=$("placeholder"), status=$("status");
+function setFile(f){if(!f)return;const url=URL.createObjectURL(f);img.src=url;img.hidden=false;ph.hidden=true;status.textContent="Photo ready · "+f.name}
+drop.onclick=()=>file.click();
+drop.onkeydown=e=>{if(e.key==="Enter"||e.key===" ")file.click()};
+["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.style.borderColor="#ff4d8d"}));
+["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.style.borderColor="#4a4458"}));
+drop.addEventListener("drop",e=>{const f=e.dataTransfer.files&&e.dataTransfer.files[0];setFile(f)});
+file.onchange=()=>setFile(file.files[0]);
+$("clear").onclick=()=>{file.value="";img.hidden=true;img.removeAttribute("src");ph.hidden=false;status.textContent="Cleared"};
+$("go").onclick=async()=>{
+  if(img.hidden){status.textContent="Add one photo first";return;}
+  $("go").disabled=true;status.textContent="Rendering No Scrubs AI look…";
+  await new Promise(r=>setTimeout(r,700+Math.random()*600));
+  img.style.filter="grayscale(.2) contrast(1.25) saturate(.55) brightness(1.12) hue-rotate(190deg)";
+  status.textContent="Demo frame ready · motion export coming soon";
+  $("go").disabled=false;
+};
+</script>
+</body>
+</html>
